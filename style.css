@@ -109,8 +109,8 @@ span::before {
     border-radius: 50%;
     color: #ffeba7;
     background-color: #102770;
-    font-family: 'unicons';
-    content: '\eb4f';
+    font-family: 'fontawesome';
+    content: "\f062";
     z-index: 20;
     top: -10px;
     left: -10px;
@@ -118,10 +118,11 @@ span::before {
     text-align: center;
     font-size: 24px;
     transition: all 0.8s ease;
+    transform: rotate(-40deg);
 }
 
 .checkbox:checked+label:before {
-    transform: translateX(44px) rotate(-270deg);
+    transform: translateX(44px) rotate(-330deg);
 }
 
 
@@ -217,7 +218,7 @@ span::before {
 
 .input-icon {
     position: absolute;
-    top: 0;
+    top: 10px;
     left: 18px;
     height: 48px;
     font-size: 24px;

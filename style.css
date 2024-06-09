@@ -299,6 +299,8 @@ span::before {
 
     width: 100vw;
     background-color: #2a2b38;
+    display: flex;
+    flex-flow:row-reverse;
 }
 
 .div-output {

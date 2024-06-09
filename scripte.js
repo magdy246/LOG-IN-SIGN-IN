@@ -12,6 +12,8 @@ var signArray = [];
 var logSubmit = document.querySelector("#logSubmit");
 var signSubmit = document.querySelector("#signSubmit");
 
+var logOutSubmit = document.querySelector("#logOutSubmit");
+
 signSubmit.addEventListener("click", function () {
   if (validatedThreeInput() == true) {
     var threeInput = {
@@ -40,6 +42,7 @@ logSubmit.addEventListener("click", function () {
     hideTwoInput();
     removeAlertTwoInput(twoInput);
     successlog();
+    document.location.assign("Logout.html");
   } else {
     switchsign();
   }
@@ -91,7 +94,7 @@ function validatedTwoInput() {
 
 function validateThreeInput(ThreeInput) {
   var regexThreeInput = {
-    signNameRegex: /^[a-z0-9_-]{3,15}$/,
+    signNameRegex: /^[A-Za-z0-9_-]{3,15}$/,
     signEmailRegex: /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/,
     signPassRegex:
       /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/,
@@ -159,12 +162,5 @@ function switchsign() {
 function successlog() {
   switchSign.classList.add("d-none");
   switchLog.classList.add("d-none");
-  alertSuccessful.classList.remove("d-none")
+  alertSuccessful.classList.remove("d-none");
 }
-
-
-
-
-
-/***********************************************/ 
-

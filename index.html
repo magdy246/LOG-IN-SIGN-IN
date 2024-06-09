@@ -6,7 +6,7 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>LOG IN & SIGN UP</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel="shortcut icon" href="image/OIP.jpeg" type="image/x-icon">
+    <link rel="shortcut icon" href="image/android-chrome-512x512.png" type="image/x-icon">
     <link rel='stylesheet' type='text/css' media='screen' href='style.css'>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/all.min.css">
@@ -17,8 +17,9 @@
         <div class="container">
             <div class="row full-height justify-content-center">
                 <div class="col-12 text-center align-self-center py-5">
-                    <div class="section pb-5 pt-5 pt-sm-2 text-center">
+                    <div class="section allContact pb-5 pt-5 pt-sm-2 text-center">
                         <h6 class="text-white mb-0 pb-3"><span>Log In </span><span>Sign Up</span></h6>
+                        <!-- <label for="reg-log"><i class="fa-solid fa-spa"></i></label> -->
                         <input class="checkbox" type="checkbox" id="reg-log" name="reg-log" />
                         <label for="reg-log"></label>
                         <div class="card-3d-wrap mx-auto">
@@ -28,16 +29,31 @@
                                         <div class="section text-center" id="update">
                                             <h4 class="text-white-50 mb-4 pb-3">Log In</h4>
                                             <div class="form-group">
-                                                <input type="email" name="logemail" class="form-style"
-                                                    placeholder="Your Email" id="logemail">
+                                                <input oninput="validateTwoInput(this)" type="email" class="form-style"
+                                                    placeholder="Your Email" id="logEmail">
+                                                <div id="alert"
+                                                    class="alert alert-danger d-flex align-items-center py-0 mb-0 mt-1">
+                                                    <i class="fa-solid fa-circle-exclamation"></i>Please enter a valid
+                                                    email address
+                                                </div>
                                                 <i class="input-icon fa-solid fa-at"></i>
                                             </div>
                                             <div class="form-group mt-2">
-                                                <input type="password" name="logpass" class="form-style"
-                                                    placeholder="Your Password" id="logpass">
-                                                <i class="input-icon fa-solid fa-unlock"></i>
+                                                <input oninput="validateTwoInput(this)" type="password" name="logpass"
+                                                    class="form-style" placeholder="Your Password" id="logPass">
+                                                <div id="alert"
+                                                    class="alert alert-danger d-flex align-items-center py-0 mb-0 mt-1">
+                                                    <i class="fa-solid fa-circle-exclamation"></i>Password not match
+                                                </div>
+                                                <i class="input-icon fa-solid fa-unlock-keyhole"></i>
                                             </div>
-                                            <a href="#" class="text-white-50 btn button-1 mt-4 fw-bolder">submit</a>
+                                            <a href="#" id="logSubmit"
+                                                class="text-white-50 btn button-1 mt-4 fw-bolder">LOG IN</a>
+                                            <div id="switch-sign" class="d-none mt-2 text-warning">Click on the arrow at
+                                                the top to go to (Sign Up) <i
+                                                    class="fa-solid fa-arrow-up-long fs-3 text-primary"></i></div>
+                                            <div id="successful" class="d-none mt-2 text-warning">Success <i
+                                                    class="fa-solid fa-signs-post fs-3 text-primary"></i></div>
                                         </div>
                                     </div>
                                 </div>
@@ -46,21 +62,41 @@
                                         <div class="section text-center" id="update">
                                             <h4 class="text-white-50 mb-4 pb-3">Sign Up</h4>
                                             <div class="form-group">
-                                                <input type="text" name="signname" class="form-style"
-                                                    placeholder="Your Full Name" id="signname">
+                                                <input oninput="validateThreeInput(this)" type="text" name="signname"
+                                                    class="form-style" placeholder="Your Full Name" id="signName">
+                                                <div id="alert"
+                                                    class="alert alert-danger d-flex align-items-center py-0 mb-0 mt-1">
+                                                    <i class="fa-solid fa-circle-exclamation"></i>Please enter your name
+                                                </div>
                                                 <i class="input-icon fa-solid fa-user"></i>
                                             </div>
                                             <div class="form-group mt-2">
-                                                <input type="email" name="signemail" class="form-style"
-                                                    placeholder="Your Email" id="signemail">
+                                                <input oninput="validateThreeInput(this)" type="email" name="signemail"
+                                                    class="form-style" placeholder="Your Email" id="signEmail">
+                                                <div id="alert"
+                                                    class="alert alert-danger d-flex align-items-center py-0 mb-0 mt-1">
+                                                    <i class="fa-solid fa-circle-exclamation"></i>Please enter your
+                                                    email : ###@##
+                                                </div>
                                                 <i class="input-icon fa-solid fa-at"></i>
                                             </div>
                                             <div class="form-group mt-2">
-                                                <input type="password" name="signpass" class="form-style"
-                                                    placeholder="Your Password" id="signpass">
-                                                <i class="input-icon fa-solid fa-unlock"></i>
+                                                <input oninput="validateThreeInput(this)" type="password"
+                                                    name="signpass" class="form-style" placeholder="Your Password"
+                                                    id="signPass">
+                                                <div id="alert"
+                                                    class="alert alert-danger d-flex align-items-center py-0 mb-0 mt-1">
+                                                    <i class="fa-solid fa-circle-exclamation"></i>Password Required
+                                                </div>
+                                                <i class="input-icon fa-solid fa-unlock-keyhole"></i>
                                             </div>
-                                            <a href="#" class="text-white-50 btn button-1 mt-4 fw-bolder">submit</a>
+                                            <a href="#" id="signSubmit"
+                                                class="text-white-50 btn button-1 mt-2 fw-bolder">SIGN UP</a>
+                                            <div id="switch-log" class="d-none text-warning">Click on the arrow at the
+                                                top to go to (Log In) <i
+                                                    class="fa-solid fa-arrow-up-long fs-3 text-primary"></i></div>
+                                            <div id="alert-message" class="d-none text-warning">You should fill in all
+                                                fields</div>
                                         </div>
                                     </div>
                                 </div>

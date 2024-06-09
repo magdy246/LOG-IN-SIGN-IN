@@ -118,7 +118,7 @@ span::before {
     text-align: center;
     font-size: 24px;
     transition: all 0.8s ease;
-    transform: rotate(-40deg);
+    transform: rotate(330deg);
 }
 
 .checkbox:checked+label:before {
@@ -218,14 +218,29 @@ span::before {
 
 .input-icon {
     position: absolute;
-    top: 10px;
+    top: 13px;
     left: 18px;
     height: 48px;
-    font-size: 24px;
+    font-size: 20px;
     line-height: 48px;
     text-align: left;
     color: #ffeba7;
     transition: all 200ms linear;
+}
+
+#alert {
+    font-size: 10px;
+    font-weight: 600;
+}
+
+#alert i {
+    margin-right: 5px;
+}
+
+#alert {
+    background-image: linear-gradient(to right, #000, #ff0000);
+    --bs-danger-border-subtle: #ff0000;
+    --bs-danger-text-emphasis: #fff;
 }
 
 .form-group input::-webkit-input-placeholder {
@@ -251,19 +266,12 @@ span::before {
     text-transform: uppercase;
     transition: all 200ms linear;
     padding: 0 30px;
-    letter-spacing: 2px;
+    letter-spacing: 1px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     text-align: center;
     box-shadow: 0 0px 34px 0 rgba(238, 187, 19, 0.2);
-}
-
-.btn:active,
-.btn:focus {
-    background-color: #102770;
-    color: #ffeba7;
-    box-shadow: 0 0px 24px 0 rgba(16, 39, 112, .2);
 }
 
 .btn:hover {
@@ -283,4 +291,18 @@ span::before {
     height: 26px;
     width: auto;
     display: block;
+}
+
+/**LOG OUT PAGE**/
+
+.div-btn {
+
+    width: 100vw;
+    background-color: #2a2b38;
+}
+
+.div-output {
+    height: 85vh;
+    color: #ffeba7;
+    text-shadow: #FC0 4px 0 10px;
 }

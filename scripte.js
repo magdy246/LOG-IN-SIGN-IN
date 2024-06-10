@@ -7,6 +7,7 @@ var switchLog = document.querySelector("#switch-log");
 var switchSign = document.querySelector("#switch-sign");
 var alertMessage = document.querySelector("#alert-message");
 var alertSuccessful = document.querySelector("#successful");
+var invalid = document.querySelector("#invalid");
 var welcomMsg = document.querySelector("#spanUser");
 var logSubmit = document.querySelector("#logSubmit");
 var signSubmit = document.querySelector("#signSubmit");
@@ -74,9 +75,9 @@ logSubmit.addEventListener("click", function () {
       hideTwoInput();
       removeAlertTwoInput();
       successlog();
-      document.location.assign = ("./Logout.html");
+      window.location.href = "./Logout.html";
     } else {
-      alertmessage();
+      Invalid();
     }
   } else {
     switchsign();
@@ -138,6 +139,10 @@ function switchlog() {
 
 function alertmessage() {
   alertMessage.classList.remove("d-none");
+}
+function Invalid() {
+  invalid.classList.remove("d-none");
+switchSign.classList.add("d-none");
 }
 
 function switchsign() {

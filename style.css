@@ -314,6 +314,9 @@ span::before {
     background-color: #2a2b38;
     display: flex;
     flex-flow: row-reverse;
+    box-shadow: 0 0px 24px 0 #000;
+    border-bottom-right-radius: 30px;
+    border-bottom-left-radius: 30px;
 }
 
 .div-output {

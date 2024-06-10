@@ -10,6 +10,6 @@ document.addEventListener("DOMContentLoaded", function () {
   var logOutSubmit = document.querySelector("#logOutSubmit");
   logOutSubmit.addEventListener("click", function () {
     sessionStorage.removeItem("signName");
-    window.location.href = "index.html";
+    window.location.href = "./index.html";
   });
 });

@@ -228,6 +228,19 @@ span::before {
     transition: all 200ms linear;
 }
 
+.eye-icon {
+    cursor: pointer;
+    position: absolute;
+    top: 13px;
+    right: 18px;
+    height: 48px;
+    font-size: 20px;
+    line-height: 48px;
+    text-align: left;
+    color: #ffeba7;
+    transition: all 200ms linear;
+}
+
 #alert {
     font-size: 10px;
     font-weight: 600;
@@ -300,7 +313,7 @@ span::before {
     width: 100vw;
     background-color: #2a2b38;
     display: flex;
-    flex-flow:row-reverse;
+    flex-flow: row-reverse;
 }
 
 .div-output {

@@ -12,11 +12,30 @@ var logSubmit = document.querySelector("#logSubmit");
 var signSubmit = document.querySelector("#signSubmit");
 var logOutSubmit = document.querySelector("#logOutSubmit");
 
+var eyeIconLog = document.querySelector("#eye-icon-log");
+var eyeIconSign = document.querySelector("#eye-icon-sign");
+
+eyeIconLog.addEventListener("click", function () {
+  if (logPass.type === "password") {
+    logPass.type = "text";
+  } else {
+    logPass.type = "password";
+  }
+});
+
+eyeIconSign.addEventListener("click", function () {
+  if (signPass.type === "password") {
+    signPass.type = "text";
+  } else {
+    signPass.type = "password";
+  }
+});
+
 var signArray = JSON.parse(localStorage.getItem("signArray")) || [];
-var userName = JSON.parse(localStorage.getItem("signArray"));
+var user = JSON.parse(localStorage.getItem("signArray"));
 
 for (var i = 0; i < signArray.length; i++) {
-  if (userName.signEmail == signArray[i].email) {
+  if (user.signEmail == signArray[i].email) {
     welcomMsg.innerHTML = `Welcome ${signArray[i].signName}`;
     break;
   }
@@ -52,11 +71,10 @@ logSubmit.addEventListener("click", function () {
 
     if (user) {
       sessionStorage.setItem("signName", JSON.stringify(user.name));
-
       hideTwoInput();
       removeAlertTwoInput();
       successlog();
-      document.location.assign("logout.html");
+      document.location.assign("./logout.html");
     } else {
       alertmessage();
     }
@@ -115,6 +133,7 @@ function removeAlertTwoInput() {
 function switchlog() {
   switchLog.classList.remove("d-none");
   alertMessage.classList.add("d-none");
+  switchSign.classList.add("d-none");
 }
 
 function alertmessage() {

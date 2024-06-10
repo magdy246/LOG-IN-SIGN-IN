@@ -7,15 +7,23 @@ var switchLog = document.querySelector("#switch-log");
 var switchSign = document.querySelector("#switch-sign");
 var alertMessage = document.querySelector("#alert-message");
 var alertSuccessful = document.querySelector("#successful");
-var signArray = [];
-
+var welcomMsg = document.querySelector("#spanUser");
 var logSubmit = document.querySelector("#logSubmit");
 var signSubmit = document.querySelector("#signSubmit");
-
 var logOutSubmit = document.querySelector("#logOutSubmit");
 
+var signArray = JSON.parse(localStorage.getItem("signArray")) || [];
+var userName = JSON.parse(localStorage.getItem("signArray"));
+
+for (var i = 0; i < signArray.length; i++) {
+  if (userName.signEmail == signArray[i].email) {
+    welcomMsg.innerHTML = `Welcome ${signArray[i].signName}`;
+    break;
+  }
+}
+
 signSubmit.addEventListener("click", function () {
-  if (validatedThreeInput() == true) {
+  if (validatedThreeInput()) {
     var threeInput = {
       name: signName.value,
       email: signEmail.value,
@@ -32,17 +40,26 @@ signSubmit.addEventListener("click", function () {
 });
 
 logSubmit.addEventListener("click", function () {
-  if (validatedTwoInput() == true) {
+  if (validatedTwoInput()) {
     var twoInput = {
       email: logEmail.value,
       pass: logPass.value,
     };
-    signArray.push(twoInput);
-    dataStored();
-    hideTwoInput();
-    removeAlertTwoInput(twoInput);
-    successlog();
-    document.location.assign("Logout.html");
+
+    var user = signArray.find(
+      (user) => user.email === logEmail.value && user.pass === logPass.value
+    );
+
+    if (user) {
+      sessionStorage.setItem("signName", JSON.stringify(user.name));
+
+      hideTwoInput();
+      removeAlertTwoInput();
+      successlog();
+      document.location.assign("logout.html");
+    } else {
+      alertmessage();
+    }
   } else {
     switchsign();
   }
@@ -52,98 +69,47 @@ function dataStored() {
   localStorage.setItem("signArray", JSON.stringify(signArray));
 }
 
-function hideThreeInput(configThreeInput) {
-  signName.value = configThreeInput ? configThreeInput.name : null;
-  signEmail.value = configThreeInput ? configThreeInput.email : null;
-  signPass.value = configThreeInput ? configThreeInput.pass : null;
+function hideThreeInput() {
+  signName.value = "";
+  signEmail.value = "";
+  signPass.value = "";
 }
 
-function hideTwoInput(configTwoInput) {
-  logEmail.value = configTwoInput ? configTwoInput.email : null;
-  logPass.value = configTwoInput ? configTwoInput.pass : null;
+function hideTwoInput() {
+  logEmail.value = "";
+  logPass.value = "";
 }
 
 function validatedThreeInput() {
-  var signNameRegex = /^[a-z0-9_-]{3,15}$/;
-  var signEmailRegex = /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/;
+  var signNameRegex = /^[a-zA-Z0-9_-]{3,15}$/;
+  var signEmailRegex = /^[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+$/;
   var signPassRegex =
     /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/;
 
-  if (signNameRegex.test(signName.value) == false) {
-    return false;
-  } else if (signEmailRegex.test(signEmail.value) == false) {
-    return false;
-  } else if (signPassRegex.test(signPass.value) == false) {
-    return false;
-  }
-  return true;
+  return (
+    signNameRegex.test(signName.value) &&
+    signEmailRegex.test(signEmail.value) &&
+    signPassRegex.test(signPass.value)
+  );
 }
 
 function validatedTwoInput() {
-  var logEmailRegex = /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/;
+  var logEmailRegex = /^[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+$/;
   var logPassRegex =
     /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/;
 
-  if (logEmailRegex.test(logEmail.value) == false) {
-    return false;
-  } else if (logPassRegex.test(logPass.value) == false) {
-    return false;
-  }
-  return true;
-}
-
-function validateThreeInput(ThreeInput) {
-  var regexThreeInput = {
-    signNameRegex: /^[A-Za-z0-9_-]{3,15}$/,
-    signEmailRegex: /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/,
-    signPassRegex:
-      /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/,
-  };
-
-  if (regexThreeInput[ThreeInput.id].test(ThreeInput.value) == true) {
-    ThreeInput.nextElementSibling.classList.add("d-none");
-    return true;
-  } else {
-    ThreeInput.nextElementSibling.classListNaNpxove("d-none");
-    return false;
-  }
-}
-
-function validateTwoInput(TwoInput) {
-  var regexTwoInput = {
-    logEmailRegex: /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/,
-    logPassRegex:
-      /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/,
-  };
-
-  if (regexTwoInput[TwoInput.id].test(TwoInput.value) == true) {
-    TwoInput.nextElementSibling.classList.add("d-none");
-    return true;
-  } else {
-    TwoInput.nextElementSibling.classListNaNpxove("d-none");
-    return false;
-  }
+  return logEmailRegex.test(logEmail.value) && logPassRegex.test(logPass.value);
 }
 
 function removeAlertThreeInput() {
-  if (signName.value == "") {
-    signName.nextElementSibling.classList.add("d-none");
-  }
-  if (signEmail.value == "") {
-    signEmail.nextElementSibling.classList.add("d-none");
-  }
-  if (signPass.value == "") {
-    signPass.nextElementSibling.classList.add("d-none");
-  }
+  signName.nextElementSibling.classList.add("d-none");
+  signEmail.nextElementSibling.classList.add("d-none");
+  signPass.nextElementSibling.classList.add("d-none");
 }
 
 function removeAlertTwoInput() {
-  if (logEmail.value == "") {
-    logEmail.nextElementSibling.classList.add("d-none");
-  }
-  if (logPass.value == "") {
-    logPass.nextElementSibling.classList.add("d-none");
-  }
+  logEmail.nextElementSibling.classList.add("d-none");
+  logPass.nextElementSibling.classList.add("d-none");
 }
 
 function switchlog() {
@@ -159,6 +125,7 @@ function switchsign() {
   switchSign.classList.remove("d-none");
   switchLog.classList.add("d-none");
 }
+
 function successlog() {
   switchSign.classList.add("d-none");
   switchLog.classList.add("d-none");

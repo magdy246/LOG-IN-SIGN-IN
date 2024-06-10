@@ -201,7 +201,7 @@ function validateInput(inputElement, regex) {
   if (regex.test(inputElement.value)) {
     validationMessage.classList.add("d-none");
   } else {
-    if (inputElement.value.length > 0) {
+    if (inputElement.value > "") {
       validationMessage.classList.remove("d-none");
     } else {
       validationMessage.classList.add("d-none");

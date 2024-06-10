@@ -135,6 +135,7 @@ function switchlog() {
   switchLog.classList.remove("d-none");
   alertMessage.classList.add("d-none");
   switchSign.classList.add("d-none");
+  invalid.classList.add("d-none");
 }
 
 function alertmessage() {

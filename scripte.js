@@ -154,4 +154,5 @@ function successlog() {
   switchSign.classList.add("d-none");
   switchLog.classList.add("d-none");
   alertSuccessful.classList.remove("d-none");
+  invalid.classList.add("d-none");
 }

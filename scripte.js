@@ -141,9 +141,10 @@ function switchlog() {
 function alertmessage() {
   alertMessage.classList.remove("d-none");
 }
+
 function Invalid() {
   invalid.classList.remove("d-none");
-switchSign.classList.add("d-none");
+  switchSign.classList.add("d-none");
 }
 
 function switchsign() {
@@ -156,4 +157,54 @@ function successlog() {
   switchLog.classList.add("d-none");
   alertSuccessful.classList.remove("d-none");
   invalid.classList.add("d-none");
+}
+
+signName.addEventListener("input", function () {
+  validateInput(signName, /^[a-zA-Z0-9_-]{3,15}$/, "signName");
+});
+
+signEmail.addEventListener("input", function () {
+  validateInput(
+    signEmail,
+    /^[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+$/,
+    "signEmail"
+  );
+});
+
+signPass.addEventListener("input", function () {
+  validateInput(
+    signPass,
+    /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/,
+    "signPass"
+  );
+});
+
+logEmail.addEventListener("input", function () {
+  validateInput(
+    logEmail,
+    /^[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+$/,
+    "logEmail"
+  );
+});
+
+logPass.addEventListener("input", function () {
+  validateInput(
+    logPass,
+    /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/,
+    "logPass"
+  );
+});
+
+function validateInput(inputElement, regex) {
+  var validationMessage = inputElement.nextElementSibling;
+
+  if (regex.test(inputElement.value)) {
+    validationMessage.classList.add("d-none");
+  } else {
+    if (inputElement.value.length > 0) {
+      validationMessage.classList.remove("d-none");
+    } else {
+      validationMessage.classList.add("d-none");
+    }
+  }
 }

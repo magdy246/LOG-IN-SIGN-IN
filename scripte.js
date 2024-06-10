@@ -74,7 +74,7 @@ logSubmit.addEventListener("click", function () {
       hideTwoInput();
       removeAlertTwoInput();
       successlog();
-      window.location.href = "./Logout.html";
+      document.location.assign = ("./Logout.html");
     } else {
       alertmessage();
     }

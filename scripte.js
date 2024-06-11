@@ -138,6 +138,7 @@ function switchLogView() {
   Alertmessage.classList.add("d-none");
   switchSign.classList.add("d-none");
   invalid.classList.add("d-none");
+  Existed.classList.add("d-none");
 }
 
 function alertMessage() {

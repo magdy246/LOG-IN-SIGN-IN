@@ -5,9 +5,10 @@ var signEmail = document.querySelector("#signEmail");
 var signPass = document.querySelector("#signPass");
 var switchLog = document.querySelector("#switch-log");
 var switchSign = document.querySelector("#switch-sign");
-var alertMessage = document.querySelector("#alert-message");
+var Alertmessage = document.querySelector("#alert-message");
 var alertSuccessful = document.querySelector("#successful");
 var invalid = document.querySelector("#invalid");
+var Existed = document.querySelector("#Existed");
 var welcomMsg = document.querySelector("#spanUser");
 var logSubmit = document.querySelector("#logSubmit");
 var signSubmit = document.querySelector("#signSubmit");
@@ -42,30 +43,33 @@ for (var i = 0; i < signArray.length; i++) {
   }
 }
 
+function emailFounded() {
+  return signArray.some((user) => user.email === signEmail.value);
+}
+
 signSubmit.addEventListener("click", function () {
   if (validatedThreeInput()) {
-    var threeInput = {
-      name: signName.value,
-      email: signEmail.value,
-      pass: signPass.value,
-    };
-    signArray.push(threeInput);
-    dataStored();
-    hideThreeInput();
-    removeAlertThreeInput();
-    switchlog();
+    if (emailFounded()) {
+      existedEmail();
+    } else {
+      var threeInput = {
+        name: signName.value,
+        email: signEmail.value,
+        pass: signPass.value,
+      };
+      signArray.push(threeInput);
+      dataStored();
+      hideThreeInput();
+      removeAlertThreeInput();
+      switchLogView();
+    }
   } else {
-    alertmessage();
+    alertMessage();
   }
 });
 
 logSubmit.addEventListener("click", function () {
   if (validatedTwoInput()) {
-    var twoInput = {
-      email: logEmail.value,
-      pass: logPass.value,
-    };
-
     var user = signArray.find(
       (user) => user.email === logEmail.value && user.pass === logPass.value
     );
@@ -74,13 +78,13 @@ logSubmit.addEventListener("click", function () {
       sessionStorage.setItem("signName", JSON.stringify(user.name));
       hideTwoInput();
       removeAlertTwoInput();
-      successlog();
+      successLog();
       window.location.href = "./Logout.html";
     } else {
-      Invalid();
+      invalidCredentials();
     }
   } else {
-    switchsign();
+    switchSignView();
   }
 });
 
@@ -102,8 +106,7 @@ function hideTwoInput() {
 function validatedThreeInput() {
   var signNameRegex = /^[a-zA-Z0-9_-]{3,15}$/;
   var signEmailRegex = /^[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+$/;
-  var signPassRegex =
-    /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/;
+  var signPassRegex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/;
 
   return (
     signNameRegex.test(signName.value) &&
@@ -114,8 +117,7 @@ function validatedThreeInput() {
 
 function validatedTwoInput() {
   var logEmailRegex = /^[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+$/;
-  var logPassRegex =
-    /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/;
+  var logPassRegex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/;
 
   return logEmailRegex.test(logEmail.value) && logPassRegex.test(logPass.value);
 }
@@ -131,68 +133,61 @@ function removeAlertTwoInput() {
   logPass.nextElementSibling.classList.add("d-none");
 }
 
-function switchlog() {
+function switchLogView() {
   switchLog.classList.remove("d-none");
-  alertMessage.classList.add("d-none");
+  Alertmessage.classList.add("d-none");
   switchSign.classList.add("d-none");
   invalid.classList.add("d-none");
 }
 
-function alertmessage() {
-  alertMessage.classList.remove("d-none");
+function alertMessage() {
+  Alertmessage.classList.remove("d-none");
+  Existed.classList.add("d-none");
 }
 
-function Invalid() {
+function invalidCredentials() {
   invalid.classList.remove("d-none");
   switchSign.classList.add("d-none");
 }
 
-function switchsign() {
+function switchSignView() {
   switchSign.classList.remove("d-none");
   switchLog.classList.add("d-none");
 }
 
-function successlog() {
+function successLog() {
   switchSign.classList.add("d-none");
   switchLog.classList.add("d-none");
   alertSuccessful.classList.remove("d-none");
   invalid.classList.add("d-none");
 }
 
+function existedEmail() {
+  Existed.classList.remove("d-none");
+  Alertmessage.classList.add("d-none");
+}
+
 signName.addEventListener("input", function () {
-  validateInput(signName, /^[a-zA-Z0-9_-]{3,15}$/, "signName");
+  validateInput(signName, /^[a-zA-Z0-9_-]{3,15}$/);
 });
 
 signEmail.addEventListener("input", function () {
-  validateInput(
-    signEmail,
-    /^[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+$/,
-    "signEmail"
-  );
+  validateInput(signEmail, /^[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+$/);
 });
 
 signPass.addEventListener("input", function () {
   validateInput(
     signPass,
-    /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/,
-    "signPass"
+    /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/
   );
 });
 
 logEmail.addEventListener("input", function () {
-  validateInput(
-    logEmail,
-    /^[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+$/,
-    "logEmail"
-  );
+  validateInput(logEmail, /^[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+$/);
 });
 
 logPass.addEventListener("input", function () {
-  validateInput(
-    logPass,
-    /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/,
-    "logPass"
-  );
+  validateInput(logPass, /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/);
 });
 
 function validateInput(inputElement, regex) {
@@ -201,7 +196,7 @@ function validateInput(inputElement, regex) {
   if (regex.test(inputElement.value)) {
     validationMessage.classList.add("d-none");
   } else {
-    if (inputElement.value > "") {
+    if (inputElement.value) {
       validationMessage.classList.remove("d-none");
     } else {
       validationMessage.classList.add("d-none");

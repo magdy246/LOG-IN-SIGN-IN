@@ -106,7 +106,8 @@ function hideTwoInput() {
 function validatedThreeInput() {
   var signNameRegex = /^[a-zA-Z0-9_-]{3,15}$/;
   var signEmailRegex = /^[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+$/;
-  var signPassRegex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/;
+  var signPassRegex =
+    /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/;
 
   return (
     signNameRegex.test(signName.value) &&
@@ -117,7 +118,8 @@ function validatedThreeInput() {
 
 function validatedTwoInput() {
   var logEmailRegex = /^[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+$/;
-  var logPassRegex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/;
+  var logPassRegex =
+    /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/;
 
   return logEmailRegex.test(logEmail.value) && logPassRegex.test(logPass.value);
 }
@@ -154,6 +156,7 @@ function invalidCredentials() {
 function switchSignView() {
   switchSign.classList.remove("d-none");
   switchLog.classList.add("d-none");
+  invalid.classList.add("d-none");
 }
 
 function successLog() {
@@ -188,7 +191,10 @@ logEmail.addEventListener("input", function () {
 });
 
 logPass.addEventListener("input", function () {
-  validateInput(logPass, /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/);
+  validateInput(
+    logPass,
+    /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/
+  );
 });
 
 function validateInput(inputElement, regex) {

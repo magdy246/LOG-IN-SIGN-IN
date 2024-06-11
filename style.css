@@ -12,12 +12,15 @@
 }
 
 .body {
+
     font-family: 'Poppins', sans-serif;
     font-size: 15px;
     line-height: 1.7;
     color: #c4c3ca;
-    background: #242323;
-    overflow-x: hidden;
+    background-image: url(image/5701959_59243.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    overflow: hidden;
 }
 
 a {
@@ -66,7 +69,7 @@ span::before {
     border: 40px solid #102770;
     border-radius: 30px;
     border-width: 12px;
-    box-shadow: 0 0px 20px 0 #fff5;
+    box-shadow: -0.3px -5px 5px #fff;
     z-index: -1;
 }
 
@@ -306,12 +309,25 @@ span::before {
     display: block;
 }
 
+@media (max-width : 900px) {
+    .body {
+        background-position: center;
+        background-repeat: repeat;
+    }
+}
+
 /**LOG OUT PAGE**/
+
+.bodylog {
+    background-image: url(image/5701959_59243.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
 
 .div-btn {
 
     width: 100vw;
-    background-color: #2a2b38;
+    background-color: #0001;
     display: flex;
     flex-flow: row-reverse;
     box-shadow: 0 0px 24px 0 #000;
@@ -321,6 +337,17 @@ span::before {
 
 .div-output {
     height: 85vh;
-    color: #ffeba7;
-    text-shadow: #FC0 4px 0 10px;
+    color: #000;
+    text-shadow: 0px 0px 15px #000;
+}
+
+@media (max-width : 900px) {
+    .bodylog {
+        background-position: center;
+        background-repeat: repeat;
+    }
+    .div-output {
+        color: #fff;
+        text-shadow: 0px 0px 10px #fff;
+    }
 }

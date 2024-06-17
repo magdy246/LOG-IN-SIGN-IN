@@ -15,23 +15,49 @@ var signSubmit = document.querySelector("#signSubmit");
 var logOutSubmit = document.querySelector("#logOutSubmit");
 
 var eyeIconLog = document.querySelector("#eye-icon-log");
+var eyeIconSlashLog = document.querySelector("#eye-icon-slash-log");
 var eyeIconSign = document.querySelector("#eye-icon-sign");
+var eyeIconSlashSign = document.querySelector("#eye-icon-slash-sign");
 
 eyeIconLog.addEventListener("click", function () {
-  if (logPass.type === "password") {
-    logPass.type = "text";
-  } else {
-    logPass.type = "password";
-  }
+  logPass.type = "password";
+  logeye();
 });
 
-eyeIconSign.addEventListener("click", function () {
-  if (signPass.type === "password") {
-    signPass.type = "text";
-  } else {
-    signPass.type = "password";
-  }
+function logeye() {
+  eyeIconSlashLog.classList.remove("d-none");
+  eyeIconLog.classList.add("d-none");
+}
+
+eyeIconSlashLog.addEventListener("click", function () {
+  logPass.type = "text";
+  logslasheye();
 });
+
+function logslasheye() {
+  eyeIconSlashLog.classList.add("d-none");
+  eyeIconLog.classList.remove("d-none");
+}
+
+eyeIconSign.addEventListener("click", function () {
+  signPass.type = "password";
+  signeye();
+});
+
+function signeye() {
+  eyeIconSlashSign.classList.remove("d-none");
+  eyeIconSign.classList.add("d-none");
+}
+
+eyeIconSlashSign.addEventListener("click", function () {
+  signPass.type = "text";
+  signslasheye();
+});
+
+function signslasheye() {
+  eyeIconSlashSign.classList.add("d-none");
+  eyeIconSign.classList.remove("d-none");
+}
 
 var signArray = JSON.parse(localStorage.getItem("signArray")) || [];
 var user = JSON.parse(localStorage.getItem("signArray"));
